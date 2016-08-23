@@ -21,6 +21,8 @@ libsw.onMessage = function(dataIn) {
 	if (dataIn.type == 'com.lostinthegarden.highscore') {
 
 		var payload = dataIn.payload;
+		d3.select('#latest').text(payload.time);
+
 		if (!data[payload.tag])
 		{
 			data[payload.tag] = [];
@@ -112,17 +114,18 @@ libsw.onMessage = function(dataIn) {
 			    .attr("transform", "translate(0," + height + ")")
 			    .call(xAxis);
 
-			// // find current bin
-			// var i;
-			// for (i = 0; i < histData.length; i++) {
-			// 	if (currentLap < (histData[i].x + histData[i].dx)) {
-			// 		break;
-			// 	}
-			// }
-			// i = Math.min(i, histData.length - 1);
-			//
-			// var bar = d3.selectAll('rect')[0][i]
-			// d3.select(bar).attr('class', 'currentLap');
 		}
+
+		// find current bin
+		var i;
+		for (i = 0; i < histData.length; i++) {
+			if (payload.time < (histData[i].x + histData[i].dx)) {
+				break;
+			}
+		}
+		i = Math.min(i, histData.length - 1);
+
+		var bar = d3.select('#' + payload.tag).selectAll('rect')[0][i]
+		d3.select(bar).attr('class', 'currentLap');
 	}
 }
