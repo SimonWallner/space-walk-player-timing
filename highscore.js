@@ -48,7 +48,7 @@ libsw.onMessage = function(dataIn) {
 
 		var minTime = tags.reduce(function(previous, current) {
 			return Math.min(previous, d3.min(data[current]));
-		}, 0)
+		}, Number.MAX_VALUE)
 		var maxTime = tags.reduce(function(previous, current) {
 			return Math.max(previous, d3.max(data[current]));
 		}, 0)
