@@ -24,3 +24,7 @@
    stroke: #000;
    shape-rendering: crispEdges;
  }
+
+ text {
+     fill: red;
+ }
